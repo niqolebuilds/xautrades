@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Trading Notes</title>
+<style>
+  :root{--bg:#0f1115;--card:#171a21;--line:#262b36;--ink:#e8eaed;--muted:#9aa3b2;--gold:#e5b567;--green:#4ea672;}
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:var(--bg);color:var(--ink);font-family:-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;line-height:1.5;min-height:100vh;padding:48px 24px}
+  .wrap{max-width:900px;margin:0 auto}
+  header{text-align:center;margin-bottom:8px}
+  h1{font-size:34px;color:var(--gold);letter-spacing:-0.5px}
+  .sub{color:var(--muted);font-size:14px;margin:8px auto 4px;max-width:560px}
+  .price{display:inline-flex;gap:8px;align-items:center;background:var(--card);border:1px solid var(--line);border-radius:20px;padding:5px 14px;font-size:12.5px;color:var(--muted);margin-top:10px}
+  .price b{color:var(--gold)}
+  #q{width:100%;max-width:420px;display:block;margin:22px auto 4px;background:var(--card);border:1px solid var(--line);border-radius:10px;color:var(--ink);padding:11px 14px;font-size:14px;font-family:inherit}
+  #q:focus{outline:none;border-color:var(--gold)}
+  h2.sec{font-size:12px;text-transform:uppercase;letter-spacing:.7px;color:var(--gold);margin:30px 0 12px;border-bottom:1px solid var(--line);padding-bottom:6px}
+  .cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:14px}
+  a.card{display:block;text-decoration:none;color:inherit;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:20px;transition:transform .15s ease,border-color .15s ease,background .15s ease}
+  a.card:hover{transform:translateY(-3px);border-color:var(--gold);background:#1c1f28}
+  a.card .icon{font-size:24px}
+  a.card .tag{float:right;font-size:10px;text-transform:uppercase;letter-spacing:.5px;color:var(--muted);border:1px solid var(--line);border-radius:20px;padding:2px 8px;margin-top:4px}
+  a.card h3{font-size:16px;color:var(--gold);margin:10px 0 5px}
+  a.card p{font-size:12.5px;color:#b8b09a;line-height:1.5}
+  .none{display:none;text-align:center;color:var(--muted);font-size:14px;margin-top:24px}
+  footer{margin-top:40px;color:#6b6555;font-size:11.5px;text-align:center;line-height:1.6}
+  /* To add a page: copy an <a class="card"> block into the right section, set href + data-k keywords + text. */
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <h1>Trading Notes</h1>
+    <div class="sub">My reference library — tools, checklists, and knowledge. Click any card to open the full visual.</div>
+    <div class="price">Gold spot <b>~$4,050/oz</b> &middot; Jul 2026 &middot; verify live before trading</div>
+  </header>
+
+  <input id="q" placeholder="Search all notes…" oninput="filt()">
+
+  <h2 class="sec" data-sec>⚙️ Interactive tools</h2>
+  <div class="cards">
+    <a class="card" href="calculator.html" data-k="risk position size lot margin calculator money">
+      <span class="icon">🧮</span><span class="tag">tool</span>
+      <h3>Position Size &amp; Risk Calculator</h3>
+      <p>Enter balance, risk %, entry and stop — get the exact lot size, dollar risk, margin, and R:R. Warns when your account can't honor the trade.</p>
+    </a>
+    <a class="card" href="journal.html" data-k="journal log trades win rate expectancy history csv">
+      <span class="icon">📓</span><span class="tag">tool</span>
+      <h3>Trade Journal</h3>
+      <p>Log every trade and track win rate, net P&amp;L, expectancy, profit factor, and discipline. Saves in your browser; export to CSV.</p>
+    </a>
+  </div>
+
+  <h2 class="sec" data-sec>✅ Pre-trade checklists</h2>
+  <div class="cards">
+    <a class="card" href="xauusd-scalping-checklist.html" data-k="scalping checklist go no-go session macro dxy yields calendar news">
+      <span class="icon">🎯</span><span class="tag">checklist</span>
+      <h3>XAU/USD Scalping Checklist</h3>
+      <p>Calendar risk, session &amp; liquidity, live macro confluence, level &amp; trigger — with a GO / WAIT / NO-GO gate and current macro backdrop.</p>
+    </a>
+  </div>
+
+  <h2 class="sec" data-sec>📚 References &amp; knowledge</h2>
+  <div class="cards">
+    <a class="card" href="XAUUSD_MT5_Cheat_Sheet.html" data-k="mt5 metatrader gold cheat sheet lot order login rules">
+      <span class="icon">🪙</span><span class="tag">reference</span>
+      <h3>Gold / MT5 Cheat Sheet</h3>
+      <p>Contract math, lot sizes, order steps, position-size formula, and the risk rules — one printable page.</p>
+    </a>
+    <a class="card" href="Technical_Chart_Reading_Reference.html" data-k="technical analysis chart candlestick support resistance pattern rsi macd trend">
+      <span class="icon">📈</span><span class="tag">reference</span>
+      <h3>Technical Chart Reading</h3>
+      <p>Candlesticks, trend structure, support &amp; resistance, patterns, indicators, and a step-by-step way to read any chart.</p>
+    </a>
+    <a class="card" href="glossary.html" data-k="glossary terms definitions pip lot spread leverage margin swap dxy cpi nfp vocabulary">
+      <span class="icon">📖</span><span class="tag">reference</span>
+      <h3>Trading Glossary</h3>
+      <p>Every term in plain English — orders, risk, market behavior, and the macro drivers specific to gold. Searchable.</p>
+    </a>
+  </div>
+
+  <h2 class="sec" data-sec>🧠 Learning log</h2>
+  <div class="cards">
+    <a class="card" href="skill-drip-progress.html" data-k="ai builder agent skill drip learning log progress">
+      <span class="icon">🤖</span><span class="tag">log</span>
+      <h3>AI Builder Skill Drip</h3>
+      <p>A separate daily learning track — one concept a day on how AI agents actually work. Day 1 logged.</p>
+    </a>
+  </div>
+
+  <div class="none" id="none">Nothing matches that search.</div>
+
+  <footer>
+    Public page — don't post anything private here.<br>
+    Everything here is education, not financial advice. Prices and Fed odds move intraday — verify live before acting.
+  </footer>
+</div>
+
+<script>
+  function filt(){
+    const q=document.getElementById('q').value.toLowerCase();
+    let any=false;
+    document.querySelectorAll('a.card').forEach(c=>{
+      const hay=(c.getAttribute('data-k')+' '+c.textContent).toLowerCase();
+      const show=hay.includes(q); c.style.display=show?'':'none'; if(show)any=true;
+    });
+    document.querySelectorAll('[data-sec]').forEach(h=>{
+      const grid=h.nextElementSibling;
+      const vis=[...grid.querySelectorAll('a.card')].some(c=>c.style.display!=='none');
+      h.style.display=vis?'':'none'; grid.style.display=vis?'':'none';
+    });
+    document.getElementById('none').style.display=any?'none':'block';
+  }
+</script>
+</body>
+</html>
