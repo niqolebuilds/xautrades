@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Position Size &amp; Risk Calculator</title>
+<style>
+  :root{--bg:#0f1115;--card:#171a21;--line:#262b36;--ink:#e8eaed;--muted:#9aa3b2;--gold:#e5b567;--green:#4ea672;--red:#d1615d;--amber:#d9a441;}
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);font-family:-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;line-height:1.45;padding:28px}
+  .wrap{max-width:840px;margin:0 auto}
+  a.back{color:var(--gold);text-decoration:none;font-size:12px}
+  h1{font-size:22px;margin:8px 0 2px}h1 span{color:var(--gold)}
+  .sub{color:var(--muted);font-size:13px;margin-bottom:18px}
+  .cols{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+  @media(max-width:720px){.cols{grid-template-columns:1fr}}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:16px 18px}
+  .card h2{font-size:13px;text-transform:uppercase;letter-spacing:.6px;color:var(--gold);margin:0 0 12px}
+  label{display:block;font-size:12px;color:var(--muted);margin:10px 0 3px}
+  input,select{width:100%;background:#0c0e12;border:1px solid var(--line);border-radius:6px;color:var(--ink);padding:8px 10px;font-size:14px;font-family:inherit}
+  input:focus,select:focus{outline:none;border-color:var(--gold)}
+  .row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+  .out{display:flex;justify-content:space-between;align-items:baseline;padding:9px 0;border-bottom:1px dashed #20252f;font-size:13.5px}
+  .out:last-child{border-bottom:none}
+  .out .k{color:var(--muted)}
+  .out .v{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:15px;font-weight:600}
+  .big{font-size:20px;color:var(--gold)}
+  .flag{margin-top:12px;border-radius:8px;padding:10px 12px;font-size:12.5px;display:none}
+  .flag.show{display:block}
+  .flag.ok{background:rgba(78,166,114,.13);color:var(--green);border:1px solid rgba(78,166,114,.3)}
+  .flag.warn{background:rgba(217,164,65,.13);color:var(--amber);border:1px solid rgba(217,164,65,.3)}
+  .flag.bad{background:rgba(209,97,93,.13);color:var(--red);border:1px solid rgba(209,97,93,.3)}
+  .foot{margin-top:16px;font-size:11.5px;color:var(--muted);border-top:1px solid var(--line);padding-top:10px}
+  .hint{font-size:11px;color:#6b7280;margin-top:2px}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <a class="back" href="index.html">&larr; Back to hub</a>
+  <h1>Position Size &amp; <span>Risk Calculator</span></h1>
+  <div class="sub">Tells you the lot size for a fixed-risk trade — and warns when your account can't honor it. Defaults to XAUUSD (gold).</div>
+
+  <div class="cols">
+    <div class="card">
+      <h2>Inputs</h2>
+      <div class="row">
+        <div><label>Account balance ($)</label><input id="bal" type="number" value="50" step="1"></div>
+        <div><label>Risk per trade (%)</label><input id="risk" type="number" value="2" step="0.1"></div>
+      </div>
+      <div class="row">
+        <div><label>Entry price</label><input id="entry" type="number" value="4050" step="0.1"></div>
+        <div><label>Stop-loss price</label><input id="stop" type="number" value="4040" step="0.1"></div>
+      </div>
+      <div class="row">
+        <div><label>Take-profit (optional)</label><input id="tp" type="number" value="4070" step="0.1"></div>
+        <div><label>Leverage 1:</label><input id="lev" type="number" value="500" step="1"></div>
+      </div>
+      <div class="row">
+        <div><label>Contract size (oz/lot)</label><input id="contract" type="number" value="100" step="1"><div class="hint">XAUUSD = 100. Don't change unless your broker differs.</div></div>
+        <div><label>Min lot (broker)</label><input id="minlot" type="number" value="0.01" step="0.01"></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>Result</h2>
+      <div class="out"><span class="k">Ideal position size</span><span class="v big" id="oLots">—</span></div>
+      <div class="out"><span class="k">Rounded to broker min</span><span class="v" id="oLotsR">—</span></div>
+      <div class="out"><span class="k">$ at risk (intended)</span><span class="v" id="oRisk">—</span></div>
+      <div class="out"><span class="k">$ at risk (rounded lot)</span><span class="v" id="oRiskR">—</span></div>
+      <div class="out"><span class="k">Stop distance</span><span class="v" id="oStop">—</span></div>
+      <div class="out"><span class="k">Reward : Risk</span><span class="v" id="oRR">—</span></div>
+      <div class="out"><span class="k">Position notional</span><span class="v" id="oNotional">—</span></div>
+      <div class="out"><span class="k">Margin required</span><span class="v" id="oMargin">—</span></div>
+      <div id="flag" class="flag"></div>
+    </div>
+  </div>
+
+  <div class="foot">
+    Formula: <b>lots = (balance &times; risk%) &divide; (contract_size &times; stop_distance)</b>. Reference/education only — not financial advice. Spread, slippage, and swap fees are not included and will make real losses slightly larger.
+  </div>
+</div>
+
+<script>
+  const $ = id => document.getElementById(id);
+  const ids = ['bal','risk','entry','stop','tp','lev','contract','minlot'];
+  const money = n => (n<0?'-':'')+'$'+Math.abs(n).toLocaleString(undefined,{maximumFractionDigits:2});
+
+  function calc(){
+    const bal=+$('bal').value, risk=+$('risk').value, entry=+$('entry').value,
+          stop=+$('stop').value, tp=+$('tp').value, lev=+$('lev').value||1,
+          contract=+$('contract').value||100, minlot=+$('minlot').value||0.01;
+
+    const stopDist = Math.abs(entry-stop);
+    const riskUSD = bal*(risk/100);
+    const flag=$('flag'); flag.className='flag';
+
+    if(!stopDist||!riskUSD||!contract){ flag.className='flag show warn'; flag.textContent='Enter an entry and a different stop price.';
+      ['oLots','oLotsR','oRisk','oRiskR','oStop','oRR','oNotional','oMargin'].forEach(i=>$(i).textContent='—'); return; }
+
+    const idealLots = riskUSD/(contract*stopDist);
+    // round DOWN to nearest minlot step so you never exceed intended risk
+    const steps = Math.floor(idealLots/minlot);
+    const roundedLots = steps*minlot;
+    const riskAtRounded = roundedLots*contract*stopDist;
+    const notional = roundedLots*contract*entry;
+    const margin = notional/lev;
+    const rr = tp? Math.abs(tp-entry)/stopDist : null;
+
+    $('oLots').textContent = idealLots.toFixed(4)+' lot';
+    $('oLotsR').textContent = roundedLots.toFixed(2)+' lot';
+    $('oRisk').textContent = money(riskUSD);
+    $('oRiskR').textContent = money(riskAtRounded);
+    $('oStop').textContent = '$'+stopDist.toFixed(2);
+    $('oRR').textContent = rr? rr.toFixed(2)+' : 1' : '—';
+    $('oNotional').textContent = money(notional);
+    $('oMargin').textContent = money(margin);
+
+    // Verdict logic
+    if(roundedLots < minlot || steps<1){
+      flag.className='flag show bad';
+      flag.innerHTML='<b>Account too small for this trade.</b> The smallest lot ('+minlot+') would risk '+money(minlot*contract*stopDist)+' — more than your '+money(riskUSD)+' budget. To trade this stop at '+risk+'% risk you\'d need about '+money((minlot*contract*stopDist)/(risk/100))+' in the account. Widen the account, tighten the stop, or accept higher risk.';
+    } else if(margin>bal){
+      flag.className='flag show bad';
+      flag.innerHTML='<b>Not enough margin.</b> This position needs '+money(margin)+' margin but you only have '+money(bal)+'. Reduce size or raise leverage.';
+    } else if(riskAtRounded > riskUSD*1.5){
+      flag.className='flag show warn';
+      flag.innerHTML='Rounded lot risks '+money(riskAtRounded)+' — well above your '+money(riskUSD)+' target. Small accounts can\'t size precisely; consider a wider stop or accept the overshoot.';
+    } else if(rr && rr<2){
+      flag.className='flag show warn';
+      flag.innerHTML='Reward:risk is '+rr.toFixed(2)+':1 — below the 2:1 minimum. Move the target further or skip the trade.';
+    } else {
+      flag.className='flag show ok';
+      flag.innerHTML='Sane setup: risking '+money(riskAtRounded)+' ('+(riskAtRounded/bal*100).toFixed(1)+'% of account)'+(rr?' for '+rr.toFixed(2)+':1':'')+'. Margin '+money(margin)+' of '+money(bal)+'.';
+    }
+  }
+  ids.forEach(i=>$(i).addEventListener('input',calc));
+  calc();
+</script>
+</body>
+</html>
