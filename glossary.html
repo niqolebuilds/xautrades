@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Trading Glossary</title>
+<style>
+  :root{--bg:#0f1115;--card:#171a21;--line:#262b36;--ink:#e8eaed;--muted:#9aa3b2;--gold:#e5b567;}
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);font-family:-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;line-height:1.5;padding:28px}
+  .wrap{max-width:860px;margin:0 auto}
+  a.back{color:var(--gold);text-decoration:none;font-size:12px}
+  h1{font-size:22px;margin:8px 0 2px}h1 span{color:var(--gold)}
+  .sub{color:var(--muted);font-size:13px;margin-bottom:16px}
+  #q{width:100%;background:#0c0e12;border:1px solid var(--line);border-radius:8px;color:var(--ink);padding:10px 12px;font-size:14px;margin-bottom:18px;font-family:inherit}
+  #q:focus{outline:none;border-color:var(--gold)}
+  h2{font-size:12px;text-transform:uppercase;letter-spacing:.6px;color:var(--gold);margin:20px 0 8px;border-bottom:1px solid var(--line);padding-bottom:5px}
+  dl{margin:0}
+  .term{background:var(--card);border:1px solid var(--line);border-radius:8px;padding:11px 14px;margin-bottom:8px}
+  .term dt{font-weight:700;color:var(--gold);font-size:14px}
+  .term dd{margin:3px 0 0;font-size:13px;color:#d5d9e0}
+  .foot{margin-top:16px;font-size:11.5px;color:var(--muted);border-top:1px solid var(--line);padding-top:10px}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <a class="back" href="index.html">&larr; Back to hub</a>
+  <h1>Trading <span>Glossary</span></h1>
+  <div class="sub">The vocabulary, in plain English. Type to filter.</div>
+  <input id="q" placeholder="Search terms…" oninput="filter()">
+
+  <h2 data-sec>Order &amp; execution</h2>
+  <dl>
+    <div class="term"><dt>Long / Short</dt><dd>Long = you bought, profit if price rises. Short = you sold first, profit if price falls.</dd></div>
+    <div class="term"><dt>Bid / Ask</dt><dd>Bid = price you can sell at; Ask = price you can buy at. Ask is always higher.</dd></div>
+    <div class="term"><dt>Spread</dt><dd>The gap between bid and ask — the broker's built-in cost. On gold, ~20–40¢ normally, but it blows out around news.</dd></div>
+    <div class="term"><dt>Slippage</dt><dd>When your order fills at a worse price than expected because the market moved in the split-second it took to execute.</dd></div>
+    <div class="term"><dt>Market / Limit / Stop order</dt><dd>Market = fill now. Limit = fill only at a better price. Stop = fill once price breaks a trigger level.</dd></div>
+    <div class="term"><dt>Stop-loss (SL) / Take-profit (TP)</dt><dd>Auto-close orders. SL caps your loss; TP locks your profit. Set both before entering.</dd></div>
+  </dl>
+
+  <h2 data-sec>Size, risk &amp; money</h2>
+  <dl>
+    <div class="term"><dt>Lot</dt><dd>The trade size unit. For gold, 1.00 lot = 100 oz; 0.01 lot (micro) = 1 oz. A $1 gold move = $1 per 0.01 lot.</dd></div>
+    <div class="term"><dt>Pip / Point (gold)</dt><dd>For XAUUSD a "pip" is usually a $0.10 move; a "point" often a $0.01 move. Brokers differ — verify. Easiest to just think in dollars of price.</dd></div>
+    <div class="term"><dt>Leverage</dt><dd>Borrowing from the broker to control a larger position. 1:500 means $1 controls $500 of gold. Amplifies gains AND losses.</dd></div>
+    <div class="term"><dt>Margin</dt><dd>The deposit frozen to hold a leveraged position. Run out and you get a <b>margin call</b> / auto-liquidation.</dd></div>
+    <div class="term"><dt>Swap / Rollover</dt><dd>A fee (or credit) for holding a position overnight. Small per night, but it grinds down small accounts held for days.</dd></div>
+    <div class="term"><dt>Drawdown</dt><dd>The peak-to-trough drop in your account. A 50% drawdown needs a 100% gain just to recover.</dd></div>
+    <div class="term"><dt>R / R-multiple</dt><dd>Your result measured in units of risk. Risk $10, make $20 = +2R. Lets you compare trades of different sizes.</dd></div>
+    <div class="term"><dt>Reward : Risk (R:R)</dt><dd>Potential profit vs. potential loss on a trade. Aim for 2:1 or better.</dd></div>
+    <div class="term"><dt>Expectancy</dt><dd>Average profit per trade over many trades. Positive expectancy + enough trades = you make money even with a sub-50% win rate.</dd></div>
+  </dl>
+
+  <h2 data-sec>Market behavior</h2>
+  <dl>
+    <div class="term"><dt>Volatility / ATR</dt><dd>How much price moves. ATR (Average True Range) quantifies the typical range per period — use it to size stops sensibly.</dd></div>
+    <div class="term"><dt>Liquidity</dt><dd>How easily you can trade without moving price. High during London–NY overlap; thin in the Asian session.</dd></div>
+    <div class="term"><dt>Scalping</dt><dd>Very short-term trading — seconds to minutes — taking small, frequent profits. Costs (spread) matter enormously.</dd></div>
+    <div class="term"><dt>Whipsaw / Fake-out</dt><dd>Price breaks a level, sucks traders in, then sharply reverses — stopping them out. Common around news.</dd></div>
+    <div class="term"><dt>ATH</dt><dd>All-Time High — the highest price ever. Gold's was ~$5,595 (Jan 2026 in this dataset).</dd></div>
+  </dl>
+
+  <h2 data-sec>Gold-specific macro drivers</h2>
+  <dl>
+    <div class="term"><dt>DXY (Dollar Index)</dt><dd>The US dollar vs. a basket of currencies. Gold usually moves <b>inverse</b> to DXY — strong dollar, weak gold.</dd></div>
+    <div class="term"><dt>Real yields / US10Y</dt><dd>Inflation-adjusted bond yields. Rising real yields = headwind for gold (which pays no interest); falling = tailwind.</dd></div>
+    <div class="term"><dt>CPI / PCE</dt><dd>Inflation reports. Hot inflation → hawkish Fed → often pressures gold; soft inflation → the reverse. High-impact, high-volatility releases.</dd></div>
+    <div class="term"><dt>NFP</dt><dd>Non-Farm Payrolls — the monthly US jobs report. One of the biggest scheduled volatility events; spreads widen, expect whipsaw.</dd></div>
+    <div class="term"><dt>FOMC</dt><dd>The Fed's rate-setting meetings. Rate decisions and the chair's tone move the dollar and gold hard.</dd></div>
+    <div class="term"><dt>VWAP</dt><dd>Volume-Weighted Average Price — an intraday "fair value" line many scalpers use as a reference level.</dd></div>
+  </dl>
+
+  <div id="none" style="display:none;color:var(--muted);font-size:13px">No terms match.</div>
+  <div class="foot">Education only — not financial advice.</div>
+</div>
+<script>
+  function filter(){
+    const q=document.getElementById('q').value.toLowerCase();
+    let any=false;
+    document.querySelectorAll('.term').forEach(t=>{
+      const show=t.textContent.toLowerCase().includes(q);
+      t.style.display=show?'':'none'; if(show)any=true;
+    });
+    document.querySelectorAll('[data-sec]').forEach(h=>{
+      let n=h.nextElementSibling, vis=false;
+      while(n && n.tagName==='DL'){ if([...n.querySelectorAll('.term')].some(t=>t.style.display!=='none'))vis=true; n=n.nextElementSibling; }
+      h.style.display=vis?'':'none';
+    });
+    document.getElementById('none').style.display=any?'none':'block';
+  }
+</script>
+</body>
+</html>

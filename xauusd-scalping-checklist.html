@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>XAU/USD Scalping — Pre-Trade Checklist</title>
+<style>
+  :root{
+    --bg:#0f1115; --card:#171a21; --line:#262b36; --ink:#e8eaed;
+    --muted:#9aa3b2; --gold:#e5b567; --green:#4ea672; --red:#d1615d; --amber:#d9a441;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    line-height:1.45;padding:28px;}
+  .wrap{max-width:960px;margin:0 auto;}
+  h1{font-size:22px;margin:0 0 2px;letter-spacing:.2px}
+  h1 span{color:var(--gold)}
+  .sub{color:var(--muted);font-size:13px;margin-bottom:18px}
+  .grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  @media(max-width:760px){.grid{grid-template-columns:1fr}}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:14px 16px}
+  .card h2{font-size:14px;margin:0 0 10px;display:flex;align-items:center;gap:8px;text-transform:uppercase;letter-spacing:.6px;color:var(--gold)}
+  .n{display:inline-flex;width:20px;height:20px;border-radius:50%;background:#222834;color:var(--gold);
+    font-size:12px;align-items:center;justify-content:center;font-weight:700;flex:none}
+  ul{margin:0;padding-left:2px;list-style:none}
+  li{position:relative;padding:5px 0 5px 24px;font-size:13.5px;border-bottom:1px dashed #20252f}
+  li:last-child{border-bottom:none}
+  li:before{content:"";position:absolute;left:2px;top:9px;width:11px;height:11px;border:1.5px solid #3a4150;border-radius:3px}
+  .muted{color:var(--muted)}
+  .kbd{font-family:ui-monospace,Menlo,Consolas,monospace;background:#0c0e12;border:1px solid var(--line);
+    border-radius:4px;padding:1px 5px;font-size:12px;color:var(--ink)}
+  .gate{margin-top:16px;border-radius:10px;border:1px solid var(--line);overflow:hidden}
+  .gate .row{display:flex;gap:0;border-bottom:1px solid var(--line)}
+  .gate .row:last-child{border-bottom:none}
+  .gate .lab{flex:none;width:70px;padding:9px 10px;font-weight:700;font-size:12px;text-align:center;display:flex;align-items:center;justify-content:center}
+  .gate .txt{padding:9px 12px;font-size:13px}
+  .go{background:rgba(78,166,114,.13);color:var(--green)}
+  .no{background:rgba(209,97,93,.13);color:var(--red)}
+  .stand{background:rgba(217,164,65,.13);color:var(--amber)}
+  .foot{margin-top:16px;font-size:11.5px;color:var(--muted);border-top:1px solid var(--line);padding-top:10px}
+  .macro{display:flex;flex-wrap:wrap;gap:6px;margin-top:2px}
+  .tag{font-size:11px;background:#0c0e12;border:1px solid var(--line);border-radius:20px;padding:3px 9px;color:var(--muted)}
+  .tag b{color:var(--ink)}
+  .redwin{color:var(--red);font-weight:700}
+  .grn{color:var(--green);font-weight:700}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <a href="index.html" style="display:inline-block;margin-bottom:12px;color:var(--gold);text-decoration:none;font-size:12px">&larr; Back to hub</a>
+  <h1>XAU/USD <span>Scalping</span> — Pre-Trade Checklist</h1>
+  <div class="sub">Run top to bottom. If any <span class="redwin">NO-GO</span> gate trips, you don't click. No trade is a position.</div>
+
+  <div class="grid">
+
+    <div class="card">
+      <h2><span class="n">1</span> Calendar &amp; Event Risk</h2>
+      <ul>
+        <li>High-impact USD release in next <b>30–60 min</b>? (CPI, PCE, NFP, FOMC, Fed speakers)</li>
+        <li>If yes → <span class="stand" style="padding:1px 6px;border-radius:4px">stand aside</span> or plan the spike: wider stop, smaller size, no tight stops.</li>
+        <li>Gold spread can jump from <span class="kbd">~20–40¢</span> to <span class="kbd">several $</span> at release. Assume slippage.</li>
+        <li class="muted">Check: ForexFactory / broker calendar before every session.</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h2><span class="n">2</span> Session &amp; Liquidity</h2>
+      <ul>
+        <li>Trading the <b>London–NY overlap</b> (~08:00–11:00 ET)? Tightest spreads, cleanest moves.</li>
+        <li>Asian session = chop. Thin edge — size down or skip.</li>
+        <li>Spread normal <i>right now</i>? If abnormally wide → no entry.</li>
+        <li>Enough <b>ATR / range</b> to clear spread + a sane R:R? If not, skip.</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h2><span class="n">3</span> Macro Confluence (live)</h2>
+      <ul>
+        <li><b>DXY</b> direction — gold moves <i>inverse</i>. Don't scalp long into a ripping dollar.</li>
+        <li><b>US10Y / real yields</b> rising → gold headwind. Falling → tailwind.</li>
+        <li>Bias for the day set by yields+dollar, <i>not</i> by one CPI headline.</li>
+        <li class="muted">Trade <span class="grn">with</span> the macro tape, not against it.</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h2><span class="n">4</span> Level &amp; Trigger</h2>
+      <ul>
+        <li>Price <b>at a level</b>? Prior-day H/L, overnight range, opening range, VWAP, round #s (4000 / 4050).</li>
+        <li>Never scalp the middle of the range.</li>
+        <li>Mechanical trigger on <span class="kbd">1m/5m</span>: break-and-retest, rejection wick, momentum confirm.</li>
+        <li>Stop + target defined <b>before</b> entry. Know your invalidation.</li>
+      </ul>
+    </div>
+
+  </div>
+
+  <div class="gate">
+    <div class="row"><div class="lab go">GO</div><div class="txt go">Calendar clear · overlap session · normal spread · macro confluence · price at level · trigger fired · stop set</div></div>
+    <div class="row"><div class="lab stand">WAIT</div><div class="txt stand">At a level but no trigger yet · spread slightly wide · range too tight → let it come to you</div></div>
+    <div class="row"><div class="lab no">NO-GO</div><div class="txt no">High-impact release imminent · fighting DXY/yields · mid-range · spread blown out · no defined stop</div></div>
+  </div>
+
+  <div style="margin-top:14px" class="card">
+    <h2><span class="n">±</span> Macro Backdrop — as of 15 Jul 2026 <span class="muted" style="font-weight:400;text-transform:none;letter-spacing:0">(re-check; this ages fast)</span></h2>
+    <div class="macro">
+      <span class="tag">Gold spot <b>~$4,037/oz</b></span>
+      <span class="tag">~<b>28%</b> below Jan ATH ($5,595)</span>
+      <span class="tag">Jun CPI <b>3.5% YoY</b> (soft, energy-driven)</span>
+      <span class="tag">Core <b>2.6%</b></span>
+      <span class="tag">Fed bias <b>hawkish</b> — 9/18 see a hike</span>
+      <span class="tag">Sept hike odds <b>~47%</b></span>
+    </div>
+    <p style="font-size:12.5px;color:var(--muted);margin:10px 0 0">Regime = disinflation <i>bounce</i> inside a hawkish drawdown, not a confirmed bull. On CPI/NFP days the correct reflex is usually <b>smaller size, tighter discipline</b> — the news that makes your bias look right also manufactures the whipsaw that stops you out.</p>
+  </div>
+
+  <div class="foot">
+    Reference only — not financial advice or a recommendation to take any trade. Prices and Fed odds change intraday; verify live before acting. Built 15 Jul 2026.
+  </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Technical Chart Reading — Reference</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; color: #1c1c1c; background: #fff; line-height: 1.55; max-width: 900px; margin: 0 auto; padding: 32px 28px; font-size: 14px; }
+  h1 { font-size: 26px; color: #b8860b; letter-spacing: -0.4px; margin-bottom: 4px; }
+  .sub { color: #666; font-size: 13px; margin-bottom: 24px; }
+  h2 { font-size: 17px; color: #7a5c00; margin: 28px 0 10px; border-bottom: 2px solid #f0e6c8; padding-bottom: 5px; }
+  h3 { font-size: 14px; color: #b8860b; margin: 14px 0 4px; text-transform: uppercase; letter-spacing: 0.4px; }
+  p { margin-bottom: 8px; }
+  ul { margin: 4px 0 8px 20px; }
+  li { margin-bottom: 4px; }
+  code { background: #f4f4f4; padding: 1px 5px; border-radius: 4px; font-family: Consolas, monospace; font-size: 13px; color: #b8000b; }
+  .fig { display: flex; gap: 20px; align-items: center; flex-wrap: wrap; margin: 10px 0; }
+  .fig svg { border: 1px solid #eee; border-radius: 6px; background: #fcfbf7; }
+  .fig .caption { flex: 1; min-width: 220px; font-size: 13px; }
+  .box { background: #faf6e9; border-left: 3px solid #b8860b; padding: 10px 14px; margin: 12px 0; font-size: 13px; }
+  .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .warn { background: #fff4f4; border: 1px solid #f3c2c2; border-radius: 8px; padding: 12px 16px; margin-top: 20px; color: #8a1c1c; font-size: 13px; }
+  .green { color: #1a8f4c; } .red { color: #c0392b; }
+  table { width: 100%; border-collapse: collapse; margin: 6px 0; font-size: 13px; }
+  th, td { text-align: left; padding: 6px 8px; border-bottom: 1px solid #eee; }
+  th { background: #faf6e9; color: #7a5c00; }
+  .back { display:inline-block; margin-bottom:14px; color:#b8860b; text-decoration:none; font-size:12px; }
+  @media print { body { padding: 0; font-size: 12px; } h2 { page-break-after: avoid; } .fig, .box, table { page-break-inside: avoid; } .back{display:none} }
+</style>
+</head>
+<body>
+  <a class="back" href="index.html">&larr; Back to hub</a>
+  <h1>Technical Chart Reading</h1>
+  <div class="sub">A visual reference. TA reads probability from crowd behavior — it manages risk, it does not predict.</div>
+
+  <h2>1. The candlestick — the atom of a chart</h2>
+  <p>Every candle shows four prices over one time period (1 min, 1 hour, 1 day...): where it <strong>Opened</strong>, the <strong>High</strong>, the <strong>Low</strong>, and where it <strong>Closed</strong>. The thick part is the <em>body</em> (open→close); the thin lines are <em>wicks</em> (or shadows), showing the extremes price reached and got rejected from.</p>
+  <div class="fig">
+    <svg width="240" height="200" viewBox="0 0 240 200">
+      <line x1="70" y1="20" x2="70" y2="180" stroke="#1a8f4c" stroke-width="2"/>
+      <rect x="55" y="70" width="30" height="80" fill="#1a8f4c"/>
+      <text x="70" y="196" text-anchor="middle" font-size="11" fill="#1a8f4c">Bullish</text>
+      <text x="95" y="74" font-size="10" fill="#555">High</text>
+      <text x="95" y="150" font-size="10" fill="#555">Low</text>
+      <text x="12" y="74" font-size="10" fill="#555">Close</text>
+      <text x="12" y="154" font-size="10" fill="#555">Open</text>
+      <line x1="180" y1="20" x2="180" y2="180" stroke="#c0392b" stroke-width="2"/>
+      <rect x="165" y="60" width="30" height="80" fill="#c0392b"/>
+      <text x="180" y="196" text-anchor="middle" font-size="11" fill="#c0392b">Bearish</text>
+      <text x="205" y="64" font-size="10" fill="#555">Open</text>
+      <text x="205" y="140" font-size="10" fill="#555">Close</text>
+    </svg>
+    <div class="caption">
+      <span class="green"><strong>Bullish</strong></span> (often green/hollow): closed higher than it opened — buyers won the period.<br>
+      <span class="red"><strong>Bearish</strong></span> (often red/filled): closed lower than it opened — sellers won.<br><br>
+      <strong>Wicks tell the story:</strong> a long lower wick = price dropped but buyers pushed it back up (rejection of lows). A long upper wick = sellers rejected higher prices. Bodies show conviction; wicks show the fight.
+    </div>
+  </div>
+
+  <h2>2. Trend structure — the first thing to read</h2>
+  <p>Before anything else, answer one question: <strong>is price making higher highs or lower lows?</strong> Trend is just the pattern of swing points.</p>
+  <div class="fig">
+    <svg width="260" height="150" viewBox="0 0 260 150">
+      <polyline points="10,130 50,90 40,110 90,55 80,80 130,25" fill="none" stroke="#1a8f4c" stroke-width="2.5"/>
+      <polyline points="150,25 190,70 180,45 230,105 220,80 250,130" fill="none" stroke="#c0392b" stroke-width="2.5"/>
+      <text x="60" y="146" text-anchor="middle" font-size="11" fill="#1a8f4c">Uptrend: HH + HL</text>
+      <text x="200" y="146" text-anchor="middle" font-size="11" fill="#c0392b">Downtrend: LH + LL</text>
+    </svg>
+    <div class="caption">
+      <strong>Uptrend:</strong> Higher Highs + Higher Lows. Bias = look for buys.<br>
+      <strong>Downtrend:</strong> Lower Highs + Lower Lows. Bias = look for sells.<br>
+      <strong>Range:</strong> flat highs and lows, price bouncing sideways.<br><br>
+      Trend <em>breaks</em> when the pattern fails — e.g. an uptrend making its first lower low is an early warning the trend is turning.
+    </div>
+  </div>
+
+  <h2>3. Support &amp; resistance — where the crowd acts</h2>
+  <p><strong>Support</strong> = a price floor where buyers repeatedly step in. <strong>Resistance</strong> = a ceiling where sellers repeatedly appear. These are zones, not exact lines. The more times a level is tested and holds, the more traders watch it — which is what makes it matter.</p>
+  <div class="fig">
+    <svg width="260" height="150" viewBox="0 0 260 150">
+      <line x1="10" y1="35" x2="250" y2="35" stroke="#c0392b" stroke-width="1.5" stroke-dasharray="5,3"/>
+      <line x1="10" y1="120" x2="250" y2="120" stroke="#1a8f4c" stroke-width="1.5" stroke-dasharray="5,3"/>
+      <polyline points="10,120 45,45 80,115 115,40 150,120 185,42 220,115 250,60" fill="none" stroke="#555" stroke-width="2"/>
+      <text x="14" y="30" font-size="10" fill="#c0392b">Resistance</text>
+      <text x="14" y="134" font-size="10" fill="#1a8f4c">Support</text>
+    </svg>
+    <div class="caption">
+      <strong>Role reversal:</strong> once broken, support becomes resistance and vice-versa — an old floor becomes the new ceiling. This "flip" is one of the most reliable ideas in charting.<br><br>
+      <strong>Why it works:</strong> levels are memory. Traders who bought at support defend it; traders trapped on the wrong side sell at breakeven when price returns.
+    </div>
+  </div>
+
+  <h2>4. High-signal candles</h2>
+  <div class="grid2">
+    <div><h3>Doji — indecision</h3><p>Open ≈ close, tiny body, wicks both sides. Neither side won. At the top of a run or bottom of a drop, it warns momentum is stalling.</p></div>
+    <div><h3>Hammer / Pin bar — rejection</h3><p>Small body, long wick. Long <em>lower</em> wick at a low = buyers rejected lower prices (bullish). Long <em>upper</em> wick at a high (shooting star) = sellers rejected higher prices (bearish).</p></div>
+    <div><h3>Engulfing — takeover</h3><p>A candle whose body fully swallows the prior candle's body. Bullish engulfing at a low / bearish engulfing at a high signals control changing hands.</p></div>
+    <div><h3>The rule that matters</h3><p>A signal candle only counts <strong>at a level</strong> (support, resistance, trendline). A hammer in the middle of nowhere is noise. Location + candle = signal.</p></div>
+  </div>
+
+  <h2>5. Chart patterns — structure over many candles</h2>
+  <div class="fig">
+    <svg width="180" height="120" viewBox="0 0 180 120">
+      <polyline points="10,90 40,40 55,55 70,38 95,90" fill="none" stroke="#555" stroke-width="2"/>
+      <text x="52" y="112" text-anchor="middle" font-size="10" fill="#c0392b">Double Top (M)</text>
+    </svg>
+    <svg width="180" height="120" viewBox="0 0 180 120">
+      <polyline points="10,30 40,80 55,65 70,82 95,30" fill="none" stroke="#555" stroke-width="2"/>
+      <text x="52" y="112" text-anchor="middle" font-size="10" fill="#1a8f4c">Double Bottom (W)</text>
+    </svg>
+    <svg width="180" height="120" viewBox="0 0 180 120">
+      <polyline points="8,80 30,55 45,65 62,30 80,63 96,52 120,80" fill="none" stroke="#555" stroke-width="2"/>
+      <line x1="8" y1="72" x2="120" y2="72" stroke="#b8860b" stroke-dasharray="3,2"/>
+      <text x="64" y="112" text-anchor="middle" font-size="10" fill="#c0392b">Head &amp; Shoulders</text>
+    </svg>
+  </div>
+  <ul>
+    <li><strong>Double top / bottom (M / W):</strong> price fails twice at the same level → reversal. Confirmed when it breaks the middle "neckline."</li>
+    <li><strong>Head &amp; shoulders:</strong> three peaks, middle highest → topping pattern. Inverse version = bottoming. Trigger = neckline break.</li>
+    <li><strong>Triangles:</strong> price coils into a narrowing range (ascending = bullish bias, descending = bearish, symmetrical = neutral). Trade the <em>breakout</em> direction.</li>
+    <li><strong>Flags &amp; pennants:</strong> a sharp move, then a small consolidation, then continuation in the same direction. Continuation patterns, not reversals.</li>
+  </ul>
+  <div class="box"><strong>Universal principle:</strong> patterns are only "confirmed" on the <em>break and close</em> beyond their boundary — never on a wick poking through. Anticipating the break is guessing; trading the confirmed break is reading.</div>
+
+  <h2>6. Indicators — supporting evidence, not the story</h2>
+  <table>
+    <tr><th>Indicator</th><th>What it shows</th><th>Common read</th></tr>
+    <tr><td><strong>Moving Average (MA)</strong></td><td>Average price over N candles — smooths trend. 20/50/200 common.</td><td>Price above rising MA = uptrend. 50 crossing above 200 = "golden cross"; below = "death cross."</td></tr>
+    <tr><td><strong>RSI</strong> (0–100)</td><td>Momentum / speed of moves. Default 14.</td><td>&gt;70 = overbought, &lt;30 = oversold. <em>Divergence</em> (price new high, RSI lower high) warns of exhaustion.</td></tr>
+    <tr><td><strong>MACD</strong></td><td>Difference between two MAs — momentum &amp; direction.</td><td>MACD line crossing its signal line = momentum shift. Histogram shrinking = momentum fading.</td></tr>
+    <tr><td><strong>Volume</strong></td><td>How much traded. Conviction behind a move.</td><td>Breakouts on high volume are trustworthy; on low volume, suspect a fake-out.</td></tr>
+  </table>
+  <div class="box"><strong>Trap to avoid:</strong> indicators are <em>derived from price</em> — they lag it. Stacking ten of them doesn't give ten confirmations; they mostly say the same thing. Price action leads; use 1–2 indicators as a second opinion, not the whole thesis.</div>
+
+  <h2>7. Timeframes &amp; confluence</h2>
+  <p><strong>Higher timeframes dominate.</strong> A daily-chart resistance outranks a 5-minute one. The pros read top-down: find the trend and key levels on the daily/4-hour, then drop to a lower timeframe (15-min/5-min) to time the entry.</p>
+  <p><strong>Confluence = your edge.</strong> One signal is weak. Take a trade when several stack in the same place: e.g. price hits a daily support <em>and</em> the 200-MA <em>and</em> RSI is oversold <em>and</em> a bullish engulfing prints. Each factor alone is a coin-flip; together they tilt the odds and give you a tight, well-defined stop.</p>
+
+  <h2>8. Reading a chart, step by step</h2>
+  <ul>
+    <li><strong>1. Zoom out.</strong> Trend on the higher timeframe: up, down, or ranging?</li>
+    <li><strong>2. Mark levels.</strong> Draw the obvious support/resistance zones and trendlines. Fewer, cleaner lines beat a cluttered chart.</li>
+    <li><strong>3. Where is price now</strong> relative to those levels? Approaching one, or in no-man's-land? (No-man's-land = no trade.)</li>
+    <li><strong>4. Wait for a trigger</strong> at a level: a signal candle, a confirmed break, a retest.</li>
+    <li><strong>5. Define invalidation first.</strong> Where does this idea prove wrong? That's your stop. If the stop is far, the trade is bad — skip it.</li>
+    <li><strong>6. Check reward vs risk.</strong> Target at least 2× your risk to the next level. No 2:1, no trade.</li>
+  </ul>
+
+  <div class="warn">
+    <strong>What TA can and cannot do.</strong> It cannot predict the next candle — anyone who says otherwise is guessing with confidence. What it does: define <em>where</em> to act, <em>where</em> you're wrong (the stop), and <em>whether</em> the payoff justifies the risk. Two traders can read the same chart perfectly and one still loses — because the edge is in risk management and doing it 100 times, not in calling any single move.
+  </div>
+</body>
+</html>
